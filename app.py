@@ -54,10 +54,6 @@ if uploaded_file is not None:
         # Line chart
         st.line_chart(daily.rename(columns={"closing_date": "Date", "price_diff": "Earnings"}).set_index("Date"))
 
-        # Bottone di esempio
-        if st.button("Mostra messaggio"):
-            st.info("Hai cliccato il bottone!")
-
     else:
         st.warning("Format unsupported.")
 
