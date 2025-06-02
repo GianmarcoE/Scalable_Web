@@ -40,6 +40,8 @@ if uploaded_file is not None:
         with st.expander("Show tab", expanded=True):
             st.dataframe(filtered_df[['name', 'time_open', 'price_diff', 'percentage']], hide_index=True, column_config=
                 {
+                    "name": st.column_config.NumberColumn("Stock"),
+                    "time_open": st.column_config.NumberColumn("Days Open"),
                     "price_diff": st.column_config.NumberColumn("Earnings", format="%.2f €"),
                     "percentage": st.column_config.NumberColumn("+/-", format="%.2f%%")
                 }
