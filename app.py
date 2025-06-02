@@ -13,13 +13,12 @@ st.title("Examine your Scalable report")
 uploaded_file = st.file_uploader("Upload your Scalable report", type=["csv"])
 
 if uploaded_file is not None:
-    st.success(f"Uploaded file: {uploaded_file.name}")
     # Convert the binary file to a text stream
     text_io = io.StringIO(uploaded_file.read().decode("utf-8"))
 
     if uploaded_file.name.endswith(".csv"):
         ranges, capital, stock_list, interests = operations.input_file_prep(text_io)
-        st.subheader(f"Capital invested: {capital}€")
+        st.subheader(f"Capital invested: {'{0:.2f}'.format(capital)}€")
         st.subheader(f"Interest: {interests}€ ({round(interests * 100 / capital, 2)}%)")
         df = pd.DataFrame([vars(stock) for stock in stock_list])
 
@@ -39,7 +38,12 @@ if uploaded_file is not None:
 
         # Show filtered data
         with st.expander("Show tab", expanded=True):
-            st.dataframe(filtered_df[['name', 'time_open', 'price_diff', 'percentage']], hide_index=True)
+            st.dataframe(filtered_df[['name', 'time_open', 'price_diff', 'percentage']], hide_index=True, column_config=
+                {
+                    "price_diff": st.column_config.NumberColumn("Earnings", format="%.2f €"),
+                    "percentage": st.column_config.NumberColumn("+/-", format="%.2f%%")
+                }
+                         )
 
         # Calcola guadagni netti cumulati
         filtered_df["net_income"] = filtered_df["price_diff"].cumsum()
