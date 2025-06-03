@@ -27,7 +27,7 @@ if uploaded_file is not None:
                                   format="DD/MM/YYYY")
 
         # filter the DataFrame based on stock name
-        search_query = st.text_input("Find Stock")
+        search_query = st_keyup("Find Stock", key="0")
 
         # Filter the DataFrame based on date
         filtered_df = df[(pd.to_datetime(df['closing_date']) >= selected_date[0]) & (pd.to_datetime(df['closing_date'])
