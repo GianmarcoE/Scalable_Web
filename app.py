@@ -2,8 +2,10 @@ import streamlit as st
 import pandas as pd
 import io
 from utilities import operations
+from st_keyup import st_keyup
 
-# Titolo della pagina
+
+# Page title
 st.set_page_config(page_title="Scalable Calculator", layout="centered")
 
 # Header
